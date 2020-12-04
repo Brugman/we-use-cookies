@@ -1,12 +1,17 @@
+@wuc-color-background: #202020;
+@wuc-color-text: #fff;
+@wuc-color-btn-primary: #0be881;
+@wuc-color-btn-secondary: #fff7;
+
 #we-use-cookies {
     position: fixed;
     width: 290px;
     z-index: 99999;
     border-radius: 5px;
-    background-color: #202020;
+    background-color: @wuc-color-background;
     padding: 15px;
     font-size: 14px;
-    color: #fff;
+    color: @wuc-color-text;
 
     &.top {
         top: 5px;
@@ -63,17 +68,17 @@
             font-size: 12px;
             &.secondary {
                 border: 1px solid transparent;
-                color: #fff7;
+                color: @wuc-color-btn-secondary;
             }
             &.secondary:hover {
             }
             &.primary {
-                border: 1px solid #0be881;
-                color: #0be881;
+                border: 1px solid @wuc-color-btn-primary;
+                color: @wuc-color-btn-primary;
             }
             &.primary:hover {
-                background-color: #0be881;
-                color: #202020;
+                background-color: @wuc-color-btn-primary;
+                color: @wuc-color-background;
             }
         }
     }
