@@ -3,7 +3,7 @@
 /**
  * Plugin Name: We Use Cookies
  * Description: Let your visitors know that your website uses cookies.
- * Version: 0.1.0
+ * Version: 1.0.0
  * Plugin URI: https://timbr.dev/
  * Author: Tim Brugman
  * Author URI: https://timbr.dev/
@@ -26,10 +26,10 @@ if ( isset( $_COOKIE['i_accept_cookies'] ) )
 
 add_action( 'wp_enqueue_scripts', function () {
 
-    wp_enqueue_script( 'we-use-cookies', plugin_dir_url( __FILE__ ).'we-use-cookies.min.js', [], '0.1.0', true );
+    wp_enqueue_script( 'we-use-cookies', plugin_dir_url( __FILE__ ).'we-use-cookies.min.js', [], '1.0.0', true );
 
     if ( apply_filters( 'wuc_css', true ) )
-        wp_enqueue_style( 'we-use-cookies', plugin_dir_url( __FILE__ ).'we-use-cookies.min.css', [], '0.1.0', 'all' );
+        wp_enqueue_style( 'we-use-cookies', plugin_dir_url( __FILE__ ).'we-use-cookies.min.css', [], '1.0.0', 'all' );
 });
 
 /**
