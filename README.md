@@ -1,12 +1,12 @@
 # We Use Cookies
 
-> Cookie notice WordPress plugin for developers.
+> WordPress cookie notice plugin for developers.
 
-Let's be honest. Is your tiny website really going to get audited? With this plugin you've got *something* and no extra headaches.
+Let's be honest. Is your website really going to get audited? With this plugin you've got *something* and no extra headaches.
 
-:heavy_check_mark: Tiny.
-:heavy_check_mark: Configure with hooks.
-:heavy_check_mark: No added backend menus.
+:heavy_check_mark: Tiny.\
+:heavy_check_mark: Configure with hooks.\
+:heavy_check_mark: No added backend menus.\
 :heavy_check_mark: No added database crap.
 
 ![screenshot](/screenshot.png)
