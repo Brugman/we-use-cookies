@@ -25,8 +25,11 @@ if ( isset( $_COOKIE['i_accept_cookies'] ) )
  */
 
 add_action( 'wp_enqueue_scripts', function () {
+
     wp_enqueue_script( 'we-use-cookies', plugin_dir_url( __FILE__ ).'we-use-cookies.min.js', [], '0.1.0', true );
-    wp_enqueue_style( 'we-use-cookies', plugin_dir_url( __FILE__ ).'we-use-cookies.min.css', [], '0.1.0', 'all' );
+
+    if ( apply_filters( 'wuc_css', true ) )
+        wp_enqueue_style( 'we-use-cookies', plugin_dir_url( __FILE__ ).'we-use-cookies.min.css', [], '0.1.0', 'all' );
 });
 
 /**

@@ -56,6 +56,12 @@ add_filter( 'wuc_position', function ( $position ) {
 });
 ```
 
+### Disable the default CSS
+
+```php
+add_filter( 'wuc_css', '__return_false' );
+```
+
 ## Contributing
 
 Found a bug? Anything you would like to ask, add or change? Please open an issue so we can talk about it.
