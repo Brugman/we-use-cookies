@@ -41,12 +41,12 @@ add_action( 'wp_footer', function () {
     $message = 'We use cookies.';
     $message = apply_filters( 'wuc_message', $message );
 
-    $position = 'bottom center';
-    $position = apply_filters( 'wuc_position', $position );
+    $classes = 'bottom center';
+    $classes = apply_filters( 'wuc_classes', $classes );
 
     $more_info_page_id = apply_filters( 'wuc_more_info_page_id', false );
 ?>
-<div id="we-use-cookies" class="<?=$position;?>">
+<div id="we-use-cookies" class="<?=$classes;?>">
     <p class="message"><?php _e( $message, 'we-use-cookies' ); ?></p>
     <ul class="buttons">
         <li><a href="#" class="primary" onclick="return wuc_accept_cookies();"><?php _e( 'OK', 'we-use-cookies' ); ?></a></li>

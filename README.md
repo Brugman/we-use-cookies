@@ -46,13 +46,14 @@ add_filter( 'wuc_more_info_page_id', function () {
 });
 ```
 
-### Set position
+### Change the position & size
 
-Valid options are `top` and `bottom` for the y axis, and `left`, `center` and `right` for the x axis.
+Positioning: `top`, `bottom`, `left`, `center`, `right`.
+Size: `wide`.
 
 ```php
-add_filter( 'wuc_position', function ( $position ) {
-    return 'top right';
+add_filter( 'wuc_classes', function ( $classes ) {
+    return 'top right wide';
 });
 ```
 

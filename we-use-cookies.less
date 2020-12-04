@@ -7,9 +7,6 @@
     padding: 15px;
     font-size: 14px;
     color: #fff;
-    @media screen and ( min-width: 576px ) {
-        width: 500px;
-    }
 
     &.top {
         top: 5px;
@@ -23,12 +20,20 @@
     &.center {
         left: 50%;
         margin-left: -145px;
-        @media screen and ( min-width: 576px ) {
-            margin-left: -250px;
-        }
     }
     &.right {
         right: 5px;
+    }
+
+    &.wide {
+        @media screen and ( min-width: 576px ) {
+            width: 500px;
+        }
+    }
+    &.wide.center {
+        @media screen and ( min-width: 576px ) {
+            margin-left: -250px;
+        }
     }
 
     .message {
