@@ -58,3 +58,11 @@ add_action( 'wp_footer', function () {
 <?php
 });
 
+/**
+ * Translations.
+ */
+
+add_action( 'init', function () {
+    load_plugin_textdomain( 'we-use-cookies', false, 'we-use-cookies/languages' );
+});
+
