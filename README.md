@@ -48,7 +48,7 @@ add_filter( 'wuc_more_info_page_id', function () {
 
 ### Change the position & size
 
-Positioning: `top`, `bottom`, `left`, `center`, `right`.
+Positioning: `top`, `bottom`, `left`, `center`, `right`.\
 Size: `wide`.
 
 ```php
@@ -62,6 +62,12 @@ add_filter( 'wuc_classes', function ( $classes ) {
 ```php
 add_filter( 'wuc_css', '__return_false' );
 ```
+
+## FAQ
+
+### Does this plugin make my site GDPR compliant?
+
+I don't know. Ask your legal advisor.
 
 ## Contributing
 
