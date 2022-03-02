@@ -31,12 +31,8 @@ add_action( 'wp_enqueue_scripts', function () {
 
 add_action( 'wp_footer', function () {
 
-    $message = 'We use cookies.';
-    $message = apply_filters( 'wuc_message', $message );
-
-    $classes = 'bottom center';
-    $classes = apply_filters( 'wuc_classes', $classes );
-
+    $message = apply_filters( 'wuc_message', 'We use cookies.' );
+    $classes = apply_filters( 'wuc_classes', 'bottom center' );
     $more_info_page_id = apply_filters( 'wuc_more_info_page_id', false );
 ?>
 <div id="we-use-cookies" class="<?=$classes;?>" style="display: none;">
