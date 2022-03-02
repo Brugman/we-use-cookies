@@ -14,13 +14,6 @@ if ( !defined( 'ABSPATH' ) )
     exit;
 
 /**
- * Cookie already set? Do nothing.
- */
-
-if ( isset( $_COOKIE['i_accept_cookies'] ) )
-    return;
-
-/**
  * JS & CSS.
  */
 
@@ -46,7 +39,7 @@ add_action( 'wp_footer', function () {
 
     $more_info_page_id = apply_filters( 'wuc_more_info_page_id', false );
 ?>
-<div id="we-use-cookies" class="<?=$classes;?>">
+<div id="we-use-cookies" class="<?=$classes;?>" style="display: none;">
     <p class="message"><?php _e( $message, 'we-use-cookies' ); ?></p>
     <ul class="buttons">
         <li><a href="#" class="primary" onclick="return wuc_accept_cookies();"><?php _e( 'OK', 'we-use-cookies' ); ?></a></li>
