@@ -3,7 +3,7 @@
 /*
 Plugin Name: We Use Cookies
 Description: Let your visitors know that your website uses cookies.
-Version: 1.1.0
+Version: 1.1.1
 Plugin URI: https://timbr.dev/
 Author: Tim Brugman
 Author URI: https://timbr.dev/
