@@ -1,27 +1,11 @@
-function wuc_set_cookie( name, value, days )
-{
+function wuc_accept() {
     let date = new Date();
+    date.setTime( date.getTime() + ( 1000*60*60*24*365 ) );
+    document.cookie = 'i_accept_cookies=1; expires='+date.toUTCString()+'; path=/; SameSite=Lax;';
 
-    date.setTime( date.getTime() + ( days*24*60*60*1000 ) );
-
-    document.cookie = name+'='+value+'; '+'expires='+date.toUTCString()+'; path=/; SameSite=Lax;';
+    document.getElementById('wuc').style.display = 'none';
 }
 
-function wuc_accept_cookies()
-{
-    wuc_set_cookie( 'i_accept_cookies', 1, 365 );
+if ( document.cookie.indexOf('i_accept_cookies=') === -1 )
+    document.getElementById('wuc').style.display = 'block';
 
-    document.getElementById( 'we-use-cookies' ).style.display = 'none';
-
-    return false;
-}
-
-function wuc_load()
-{
-    if ( document.cookie.indexOf('i_accept_cookies=') > -1 )
-        return;
-
-    document.getElementById( 'we-use-cookies' ).style.display = 'block';
-}
-
-wuc_load();

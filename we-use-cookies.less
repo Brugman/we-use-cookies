@@ -3,33 +3,32 @@
 @wuc-color-btn-primary: #0be881;
 @wuc-color-btn-secondary: #fff7;
 
-#we-use-cookies {
+#wuc {
+    box-sizing: border-box;
     position: fixed;
     width: 290px;
     z-index: 99999;
-    border-radius: 5px;
+    border-radius: 10px;
     background-color: @wuc-color-background;
     padding: 15px;
     font-size: 14px;
     color: @wuc-color-text;
-
     &.top {
-        top: 5px;
+        top: 8px;
     }
     &.bottom {
-        bottom: 5px;
+        bottom: 8px;
     }
     &.left {
-        left: 5px;
+        left: 8px;
     }
     &.center {
         left: 50%;
         margin-left: -145px;
     }
     &.right {
-        right: 5px;
+        right: 8px;
     }
-
     &.wide {
         @media screen and ( min-width: 576px ) {
             width: 500px;
@@ -40,49 +39,47 @@
             margin-left: -250px;
         }
     }
-
-    .message {
+}
+.wuc__message {
+    margin: 0;
+    padding: 0;
+}
+.wuc__buttons {
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: space-between;
+    margin: 15px 0 0 0;
+    padding: 0;
+    list-style-type: none;
+    li {
         margin: 0;
-        padding: 0;
     }
-
-    .buttons {
-        display: flex;
-        flex-direction: row-reverse;
-        justify-content: space-between;
-        margin: 15px 0 0 0;
-        padding: 0;
-        list-style-type: none;
-        li {
-            margin: 0;
-        }
-        a {
-            display: block;
-            min-width: 60px;
-            height: 36px;
-            line-height: 34px;
-            padding: 0 13px;
-            transition: none;
-            letter-spacing: 1px;
-            text-decoration: none;
-            text-transform: uppercase;
-            text-align: center;
-            font-size: 12px;
-            user-select: none;
-            &.secondary {
-                border: 1px solid transparent;
-                color: @wuc-color-btn-secondary;
-            }
-            &.secondary:hover {
-            }
-            &.primary {
-                border: 1px solid @wuc-color-btn-primary;
-                color: @wuc-color-btn-primary;
-            }
-            &.primary:hover {
-                background-color: @wuc-color-btn-primary;
-                color: @wuc-color-background;
-            }
-        }
+}
+.wuc__btn {
+    display: block;
+    min-width: 60px;
+    height: 36px;
+    line-height: 34px;
+    padding: 0 13px;
+    background-color: transparent;
+    letter-spacing: 1px;
+    text-decoration: none;
+    text-transform: uppercase;
+    text-align: center;
+    font-size: 12px;
+    user-select: none;
+    cursor: pointer;
+}
+.wuc__btn--primary {
+    border: 1px solid @wuc-color-btn-primary;
+    color: @wuc-color-btn-primary;
+    transition: background-color 0.2s, color 0.2s;
+    &:hover {
+        background-color: @wuc-color-btn-primary;
+        color: @wuc-color-background;
     }
+}
+.wuc__btn--secondary {
+    border: 1px solid @wuc-color-btn-secondary;
+    color: @wuc-color-btn-secondary;
 }

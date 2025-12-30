@@ -1,14 +1,14 @@
 /**
- * Toscani's Gulp 4 gulpfile template.
+ * Medium Rare Gulp template.
  *
- * Template last updated: 2019-12-17.
- * File last updated:     2020-12-03.
+ * Template last updated: 2024-08-13.
+ * File last updated:     2024-08-13.
  */
 
 /**
  * Directories.
  */
-var dir = {
+const dir = {
     php: '.',
     input: {
         js:   '.',
@@ -23,31 +23,35 @@ var dir = {
 /**
  * Packages.
  */
-var gulp         = require( 'gulp' );
-var autoprefixer = require( 'gulp-autoprefixer' );
-var cleancss     = require( 'gulp-clean-css' );
-var concat       = require( 'gulp-concat' );
-var filter       = require( 'gulp-filter' );
-var gulpif       = require( 'gulp-if' );
-var livereload   = require( 'gulp-livereload' );
-var notify       = require( 'gulp-notify' );
-var plumber      = require( 'gulp-plumber' );
-var rename       = require( 'gulp-rename' );
-var less         = require( 'gulp-less' );
-var sourcemaps   = require( 'gulp-sourcemaps' );
-var uglify       = require( 'gulp-uglify' );
-var babel        = require( 'gulp-babel' );
-var argv         = require( 'minimist' )( process.argv.slice( 2 ) );
+import gulp         from 'gulp';
+import autoprefixer from 'gulp-autoprefixer';
+import cleancss     from '@sequencemedia/gulp-clean-css';
+import filter       from 'gulp-filter';
+import gulpif       from 'gulp-if';
+import livereload   from 'gulp-livereload';
+import notify       from 'gulp-notify';
+import plumber      from 'gulp-plumber';
+import rename       from 'gulp-rename';
+import sourcemaps   from 'gulp-sourcemaps';
+import argv         from 'minimist';
+import log          from 'fancy-log';
+// js
+import concat       from 'gulp-concat';
+import uglify       from 'gulp-uglify';
+import babel        from 'gulp-babel';
+// less
+import less         from 'gulp-less';
 
 /**
  * Environment.
  */
-var env = ( argv.env ? argv.env : 'dev' );
+const argw = argv( process.argv.slice(2) );
+const env = ( argw.env ? argw.env : 'dev' );
 
 /**
  * Config.
  */
-var config = {
+const config = {
     run_sourcemaps:   ( env == 'dev' ? true : false ),
     run_minification: ( env == 'dev' ? false : true ),
 };
@@ -58,20 +62,41 @@ var config = {
 console.log( '' );
 console.log( 'Environment:  '+( env == 'dev' ? 'Development' : 'Production' ) );
 console.log( '' );
-console.log( 'Sourcemaps:   '+( config.run_sourcemaps ? 'Yes' : 'No' ) );
+console.log( 'Sourcemaps:   '+( config.run_sourcemaps   ? 'Yes' : 'No' ) );
 console.log( 'Minification: '+( config.run_minification ? 'Yes' : 'No' ) );
 console.log( '' );
 
 /**
- * Plumber notification.
+ * Error handlers.
  */
-var onError = function ( error ) {
+const onErrorJS = function ( err ) {
+    log( '----------------' );
+    log( 'JS has an error!' );
+    log( '----------------' );
 
     notify.onError({
-        title: "Error in "+error.filename.replace( /^.*[\\\/]/, '' )+" on line "+error.line,
-        message: "-\n"+error.extract,
+        title: "Error in "+err.fileName.replace( /^.*[\\\/]/, '' )+" on line "+err.loc.line,
+        message: err.code+"\n"+err.reasonCode,
         appID: "Gulp",
-    })( error );
+    })( err );
+
+    log( '----------------' );
+
+    this.emit('end');
+};
+
+const onErrorLess = function ( err ) {
+    log( '------------------' );
+    log( 'Less has an error!' );
+    log( '------------------' );
+
+    notify.onError({
+        title: "Error in "+err.filename.replace( /^.*[\\\/]/, '' )+" on line "+err.line,
+        message: err.extract,
+        appID: "Gulp",
+    })( err );
+
+    log( '------------------' );
 
     this.emit('end');
 };
@@ -79,13 +104,13 @@ var onError = function ( error ) {
 /**
  * Procedures.
  */
-var app = [];
+const app = [];
 
 app.processJS = function ( args ) {
     // use all the files
-    return gulp.src( args.inputFiles )
+    return gulp.src( args.inputFiles, { allowEmpty: true } )
         // catch errors
-        .pipe( plumber( { errorHandler: onError } ) )
+        .pipe( plumber( { errorHandler: onErrorJS } ) )
         // start the sourcemap
         .pipe( gulpif( config.run_sourcemaps, sourcemaps.init() ) )
         // compile
@@ -100,27 +125,21 @@ app.processJS = function ( args ) {
         .pipe( gulp.dest( args.outputDir ) )
         // remove the sourcemap from the stream
         .pipe( gulpif( config.run_sourcemaps, filter( [ '**/*.js' ] ) ) )
-        // notify
-        .pipe( notify({
-            title: "Processed",
-            message: args.name,
-            appID: "Gulp",
-        }) )
         // reload the site
         .pipe( livereload() );
 };
 
 app.processLess = function ( args ) {
     // use all the files
-    return gulp.src( args.inputFiles )
+    return gulp.src( args.inputFiles, { allowEmpty: true } )
         // catch errors
-        .pipe( plumber( { errorHandler: onError } ) )
+        .pipe( plumber( { errorHandler: onErrorLess } ) )
         // start the sourcemap
         .pipe( gulpif( config.run_sourcemaps, sourcemaps.init() ) )
         // compile the less to css
         .pipe( less() )
         // autoprefix the css
-        .pipe( autoprefixer( 'last 10 versions' ) )
+        .pipe( autoprefixer() )
         // minify the css
         .pipe( gulpif( config.run_minification, cleancss( { keepSpecialComments: 0 } ) ) )
         // name the output file
@@ -131,12 +150,6 @@ app.processLess = function ( args ) {
         .pipe( gulp.dest( args.outputDir ) )
         // remove the sourcemap from the stream
         .pipe( gulpif( config.run_sourcemaps, filter( [ '**/*.css' ] ) ) )
-        // notify
-        .pipe( notify({
-            title: "Processed",
-            message: args.name,
-            appID: "Gulp",
-        }) )
         // reload the site
         .pipe( livereload() );
 };
@@ -182,7 +195,7 @@ gulp.task( 'watch', function () {
     // start livereload
     livereload.listen();
     // JavaScript
-    gulp.watch( dir.input.js+'/we-use-cookies.js',   gulp.parallel( 'js_plugin' ) );
+    gulp.watch( dir.input.js+'/we-use-cookies.js', gulp.parallel( 'js_plugin' ) );
     // Less
     gulp.watch( dir.input.less+'/we-use-cookies.less', gulp.parallel( 'less_plugin' ) );
     // PHP
@@ -192,7 +205,7 @@ gulp.task( 'watch', function () {
         title: "Gulp watch is ready.",
         message: " ",
         appID: "Gulp",
-    }) );
+    }));
 });
 
 /**
@@ -200,6 +213,6 @@ gulp.task( 'watch', function () {
  */
 gulp.task( 'default', gulp.parallel(
     'js_plugin',
-    'less_plugin',
+    'less_plugin'
 ));
 
